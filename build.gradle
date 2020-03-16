@@ -1,0 +1,56 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.intellij' version '0.4.13'
+    id 'org.jetbrains.kotlin.jvm' version '1.3.30'
+}
+
+group 'app.testgen'
+version '1.0.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    implementation "com.squareup:kotlinpoet:1.4.4"
+    implementation 'org.junit.jupiter:junit-jupiter:5.5.2'
+    implementation 'org.junit.jupiter:junit-jupiter-params:5.5.2'
+    testImplementation "com.google.truth:truth:1.0.1"
+}
+
+// See https://github.com/JetBrains/gradle-intellij-plugin/
+intellij {
+    plugins 'Kotlin'
+    updateSinceUntilBuild false
+    version = "2018.3"
+    alternativeIdePath '/Applications/Android Studio.app'
+}
+
+patchPluginXml {
+    changeNotes """
+      Add change notes here.<br>
+      <em>most HTML tags may be used</em>"""
+}
+
+runIde {
+    // Android Studio recommend heap size 2G
+    maxHeapSize = "2G"
+    // jvmArgs使っても同じ効果
+     jvmArgs '-Xmx2G'
+}
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+        freeCompilerArgs = ["-XXLanguage:+InlineClasses"]
+    }
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+test {
+    useJUnitPlatform()
+}

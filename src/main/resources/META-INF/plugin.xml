@@ -1,0 +1,28 @@
+<idea-plugin>
+    <id>app.test-gen</id>
+    <name>test-gen</name>
+    <vendor email="tkmnzm.i@gmail.com" url="https://github.com/tkmnzm">tkmnzm</vendor>
+
+    <description><![CDATA[
+    Test Generator plugin
+    ]]></description>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to model different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
+    <depends>org.jetbrains.kotlin</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+    </extensions>
+
+    <actions>
+        <group id="app.testgen.action.TestGenActionGroup"
+               class="app.testgen.action.TestGenActionGroup" text="Custom Test" description="Test Gen">
+            <add-to-group group-id="GenerateGroup" anchor="last"/>
+        </group>
+    </actions>
+    <idea-version since-build="182"/>
+</idea-plugin>
